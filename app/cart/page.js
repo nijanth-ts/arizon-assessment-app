@@ -44,7 +44,7 @@ export default function CartPage() {
                 <div className="flex items-center gap-3 mt-2">
                   <QtyButton
                     disabled={isMinQty}
-                    onClick={() => updateQty(item.id, "dec")}
+                    onClick={() => updateQty(item.id, "DECREMENT")}
                   >
                     -
                   </QtyButton>
@@ -53,7 +53,7 @@ export default function CartPage() {
                     {item.qty}
                   </span>
 
-                  <QtyButton onClick={() => updateQty(item.id, "inc")}>
+                  <QtyButton onClick={() => updateQty(item.id, "INCREMENT")}>
                     +
                   </QtyButton>
                 </div>
