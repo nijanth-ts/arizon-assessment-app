@@ -1,24 +1,7 @@
 "use client";
-import { useCart } from "../../context/CartContext";
 
-function QtyButton({ disabled, onClick, children }) {
-  return (
-    <button
-      disabled={disabled}
-      onClick={onClick}
-      className={`
-        px-3 py-1 border rounded transition select-none
-        ${
-          disabled
-            ? "opacity-40 cursor-not-allowed"
-            : "hover:bg-gray-100 cursor-pointer"
-        }
-      `}
-    >
-      {children}
-    </button>
-  );
-}
+import { useCart } from "../../context/CartContext";
+import QtyButton from "./QtyButtton";
 
 export default function CartPage() {
   const { cart, updateQty, removeItem } = useCart();
@@ -30,6 +13,11 @@ export default function CartPage() {
       </p>
     );
   }
+
+  const totalAmount = cart.reduce(
+    (sum, item) => sum + item.price * item.qty,
+    0
+  );
 
   return (
     <div className="max-w-4xl mx-auto py-10">
@@ -71,7 +59,6 @@ export default function CartPage() {
                 </div>
               </div>
 
-              {/* Delete Button */}
               <button
                 onClick={() => removeItem(item.id)}
                 className="text-red-600 font-semibold hover:text-red-800 transition cursor-pointer"
@@ -81,6 +68,11 @@ export default function CartPage() {
             </div>
           );
         })}
+      </div>
+
+      <div className="mt-6 flex justify-end items-center gap-4 text-xl font-semibold">
+        <span>Total:</span>
+        <span>${totalAmount.toFixed(2)}</span>
       </div>
     </div>
   );
